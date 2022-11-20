@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>My first black | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CF1684H Hard Cut 题解题意给定一个 01 字符串 s。 你需要对其进行划分，使得最终把每一段当做二进制数加起来后得到的数是 2^k。 有解输出任意一组解，无解输出 -1。 solution（l , r , k , n）(n可以为大于等于k的2的幂次方) (或者n等于 2^ (log n) (以2为底)) （两者在本质上是一样的） (l  , t , (下取整)k&#x2F;2 ,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="My first black">
+<meta property="og:url" content="http://example.com/2022/11/11/CF/CF1684HHard%20Cut/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="CF1684H Hard Cut 题解题意给定一个 01 字符串 s。 你需要对其进行划分，使得最终把每一段当做二进制数加起来后得到的数是 2^k。 有解输出任意一组解，无解输出 -1。 solution（l , r , k , n）(n可以为大于等于k的2的幂次方) (或者n等于 2^ (log n) (以2为底)) （两者在本质上是一样的） (l  , t , (下取整)k&#x2F;2 ,">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-11-11T12:12:43.234Z">
+<meta property="article:modified_time" content="2022-11-15T05:02:50.108Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-CF/CF1684H	Hard Cut" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/11/CF/CF1684H%09Hard%20Cut/" class="article-date">
+  <time datetime="2022-11-11T12:12:43.234Z" itemprop="datePublished">2022-11-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      My first black
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CF1684H-Hard-Cut-题解"><a href="#CF1684H-Hard-Cut-题解" class="headerlink" title="CF1684H Hard Cut 题解"></a>CF1684H Hard Cut 题解</h1><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><pre class="line-numbers language-none"><code class="language-none">给定一个 01 字符串 s。
+你需要对其进行划分，使得最终把每一段当做二进制数加起来后得到的数是 2^k。
+有解输出任意一组解，无解输出 -1。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="solution"><a href="#solution" class="headerlink" title="solution"></a>solution</h3><pre class="line-numbers language-none"><code class="language-none">（l , r , k , n）(n可以为大于等于k的2的幂次方) (或者n等于 2^ (log n) (以2为底)) （两者在本质上是一样的）
+(l  , t , (下取整)k&#x2F;2 , n&#x2F;2 )  (t , r ,(上取整) k&#x2F;2 ， n&#x2F;2) 
+本题实际就是解决5的问题 ，我们只要不让其递归到5就行 ，然后让我们构造出6到11的最终解就行，然后我们递归的时候就不会到5了。
+同时我们验证了6到11是满足上述条件的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h3><pre class="line-numbers language-none"><code class="language-none">#include&lt;bits&#x2F;stdc++.h&gt;
+using namespace std;
+using ll&#x3D;long long;
+inline ll read()&#123;
+	ll x&#x3D;0;
+	bool f&#x3D;0;
+	char c&#x3D;getchar();
+	while(!isdigit(c))&#123;
+		if(c&#x3D;&#x3D;&#39;-&#39;) f&#x3D;1;
+		c&#x3D;getchar();
+	&#125;
+	while(isdigit(c))&#123;
+		x&#x3D;x*10+c-&#39;0&#39;;
+		c&#x3D;getchar();
+	&#125;
+	return f?-x:x;
+&#125;
+const int maxn&#x3D;1e6+5;
+int n,s[maxn];
+char a[maxn];
+vector&lt;int&gt; vec;
+vector&lt;pair&lt;int,int&gt;&gt; ans;
+int get(int l,int k)&#123;
+	return vec[s[l-1]+k-1];
+&#125;
+void solve(int l,int r,int y)&#123;
+	int x&#x3D;s[r]-s[l-1];
+	if(x&gt;11)&#123;
+		int p&#x3D;get(l,x&#x2F;2);
+		solve(l,p,y&#x2F;2);
+		solve(p+1,r,y&#x2F;2);
+	&#125;
+	else if(x&#x3D;&#x3D;y) for(int i&#x3D;l;i&lt;&#x3D;r;i++) ans.push_back(&#123;i,i&#125;);
+	else if(y&lt;&#x3D;x*3&#x2F;2 )&#123; &#x2F;&#x2F; 只有3 凑成2
+		int p&#x3D;get(l,1);
+		for(int i&#x3D;l;i&lt;p;i++) ans.push_back(&#123;i,i&#125;);
+		ans.push_back(&#123;p,p+1&#125;);
+		for(int i&#x3D;p+2;i&lt;&#x3D;get(l,2);i++) ans.push_back(&#123;i,i&#125;);
+		solve(get(l,2)+1,r,y-3);
+	&#125;
+	else if(x&#x3D;&#x3D;10||x&#x3D;&#x3D;8)&#123;
+		int p&#x3D;get(l,4);
+		solve(l,p,8);
+		solve(p+1,r,8);
+	&#125;
+	else if(x&#x3D;&#x3D;9||x&#x3D;&#x3D;4)&#123;
+		int p&#x3D;get(l,1);
+		for(int i&#x3D;l;i&lt;p;i++) ans.push_back(&#123;i,i&#125;);
+		ans.push_back(&#123;p,p+2&#125;);
+		solve(p+3,r,y-((a[p]-&#39;0&#39;)&lt;&lt;2|(a[p+1]-&#39;0&#39;)&lt;&lt;1|(a[p+2]-&#39;0&#39;)));
+	&#125;
+	else if(x&#x3D;&#x3D;7)&#123;
+		int p&#x3D;get(l,3);
+		solve(l,p,3);
+		solve(p+1,r,8);
+	&#125;
+&#125;
+int main()&#123;
+#ifdef LOCAL
+	freopen(&quot;in.txt&quot;,&quot;r&quot;,stdin);
+	freopen(&quot;out.txt&quot;,&quot;w&quot;,stdout);
+#endif
+	int T&#x3D;read();
+	while(T--)&#123;
+		scanf(&quot;%s&quot;,a+1);
+		n&#x3D;strlen(a+1);
+		vec.clear();
+		for(int i&#x3D;1;i&lt;&#x3D;n;i++)&#123;
+			s[i]&#x3D;s[i-1]+a[i]-&#39;0&#39;;
+			if(a[i]&#x3D;&#x3D;&#39;1&#39;) vec.push_back(i);
+		&#125;
+		if(!s[n])&#123;
+			printf(&quot;-1\n\n&quot;);
+			continue;
+		&#125;
+		ans.clear();
+		if(s[n]&#x3D;&#x3D;5)&#123;
+			if(vec[4]&#x3D;&#x3D;vec[0]+4)&#123;
+				for(int i&#x3D;1;i&lt;vec[0];i++) ans.push_back(&#123;i,i&#125;);
+				ans.push_back(&#123;vec[0],vec[3]&#125;);
+				for(int i&#x3D;vec[4];i&lt;&#x3D;n;i++) ans.push_back(&#123;i,i&#125;);
+			&#125;
+			else for(int i:vec) if(a[i+1]&#x3D;&#x3D;&#39;0&#39;)&#123;
+				for(int j&#x3D;1;j&lt;i;j++) ans.push_back(&#123;j,j&#125;);
+				ans.push_back(&#123;i,i+2&#125;);
+				for(int j&#x3D;i+3;j&lt;&#x3D;n;j++) ans.push_back(&#123;j,j&#125;);
+				break;
+			&#125;
+		&#125;
+		else&#123;
+			int y&#x3D;1;
+			while(y&lt;s[n]) y*&#x3D;2;
+			solve(1,n,y);
+		&#125;
+		printf(&quot;%d\n&quot;,(int)ans.size());
+		for(auto x:ans) printf(&quot;%d %d\n&quot;,x.first,x.second);
+		printf(&quot;\n&quot;);
+	&#125;
+#ifdef LOCAL
+	fprintf(stderr,&quot;%f\n&quot;,1.0*clock()&#x2F;CLOCKS_PER_SEC);
+#endif
+	return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/11/CF/CF1684HHard%20Cut/" data-id="clachxtd20000ktcp5i1ham45" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/11/11/CF/CF1704H1%09Game%20of%20AI%20(easy%20version)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CF1704H1	Game of AI (easy version)
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/11/17/CF/CF1687D%09Cute%20number/">CF1684H Hard Cut 题解</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/11/ICPC%20tourist/47-th%20shenyan%20%20tourist%20/">My first ICPC 沈阳</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/11/CF/CF1704H1%09Game%20of%20AI%20(easy%20version)/">CF1704H1	Game of AI (easy version)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/11/CF/CF1684H%09Hard%20Cut/">My first black</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

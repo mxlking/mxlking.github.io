@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>CF1684H Hard Cut 题解 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="title定义 f(x)表示严格大于 x 的最小的完全平方数，定义 g(x)为小于等于 x 的最大的完全平方数。例如，f(1)&#x3D;f(2)&#x3D;g(4)&#x3D;g(8)&#x3D;4 蓝认为，一个正整数是“可爱”的，当且仅当 x-g(x)&lt;f(x)-x，例如，1,5,11 是可爱的正整数，而 3,8,15 不是。 蓝给了你一个长度为 n 的正整数数列 ai ，你需要帮她找到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CF1684H Hard Cut 题解">
+<meta property="og:url" content="http://example.com/2022/11/17/CF/CF1687DCute%20number/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="title定义 f(x)表示严格大于 x 的最小的完全平方数，定义 g(x)为小于等于 x 的最大的完全平方数。例如，f(1)&#x3D;f(2)&#x3D;g(4)&#x3D;g(8)&#x3D;4 蓝认为，一个正整数是“可爱”的，当且仅当 x-g(x)&lt;f(x)-x，例如，1,5,11 是可爱的正整数，而 3,8,15 不是。 蓝给了你一个长度为 n 的正整数数列 ai ，你需要帮她找到">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-11-17T13:32:32.705Z">
+<meta property="article:modified_time" content="2022-11-17T13:32:32.709Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-CF/CF1687D	Cute number" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/17/CF/CF1687D%09Cute%20number/" class="article-date">
+  <time datetime="2022-11-17T13:32:32.705Z" itemprop="datePublished">2022-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CF1684H Hard Cut 题解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="title"><a href="#title" class="headerlink" title="title"></a>title</h3><pre class="line-numbers language-none"><code class="language-none">定义 f(x)表示严格大于 x 的最小的完全平方数，定义 g(x)为小于等于 x 的最大的完全平方数。例如，f(1)&#x3D;f(2)&#x3D;g(4)&#x3D;g(8)&#x3D;4
+蓝认为，一个正整数是“可爱”的，当且仅当 x-g(x)&lt;f(x)-x，例如，1,5,11 是可爱的正整数，而 3,8,15 不是。
+蓝给了你一个长度为 n 的正整数数列 ai ，你需要帮她找到最小的非负整数 k，使得对于 所有ai+k 是可爱的。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="solution"><a href="#solution" class="headerlink" title="solution"></a>solution</h3><pre class="line-numbers language-none"><code class="language-none">首先我们证明在那些区间是好数那些区间是坏数    根据题目得 x - (p*p)&lt; (p+1)*(p+1) -x 
+可以求得   p*p &lt;&#x3D;x&lt;&#x3D;p*p+p
+然后我们发现当 k &#x3D; a[n]*a[n]- a[1]的时候发现他一定有解
+然后我不禁被带到了一个 n*sqrt(n)的算法里面去  
+确定a_1位置是sqrt(n) 每次枚举是n 总复杂度如上
+或者我们确定a1的位置 然后在枚举其他位置的a_i 检查起是否合法就行 
+其实想到这距离正解只有一步之遥了
+我们只需要在处理以下每个a[i] 与 a_1的差值 通过差值来计算我们上述如何检查的就可以具体实现见代码
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="AC-Code"><a href="#AC-Code" class="headerlink" title="AC Code"></a>AC Code</h3><pre class="line-numbers language-none"><code class="language-none">#include&lt;bits&#x2F;stdc++.h&gt;
+#define int long long 
+using namespace std ;
+const int N &#x3D; 4e6 + 100 ;
+int a[N] , pre[N] ,d[N] ,cnt[N] ,ne[N]; 
+void solve()
+&#123;
+	int n; std:cin&gt;&gt;n;
+	for(int i&#x3D;1 ; i&lt;&#x3D;n;i++) std::cin&gt;&gt;a[i]  ,cnt[a[i] - a[1]]++;
+	pre[0] &#x3D;-1;	
+	cnt[0] &#x3D; 0 ; 
+	for(int i&#x3D;1;i&lt;&#x3D;N - 10;i++)
+	&#123;
+		if(cnt[i]) pre[i] &#x3D;  i ;
+		else pre[i] &#x3D; pre[i-1] ;
+	&#125;
+	ne[N-9] &#x3D; N-9 ;
+	for(int i &#x3D; N -10 ;i&gt;&#x3D;0 ;i--)
+	&#123;
+		if(cnt[i])  ne[i] &#x3D; i;
+		else ne[i] &#x3D; ne[i+1] ;
+	&#125;
+	for(int i&#x3D;0 ; i&lt;&#x3D;a[n]+1 ; i++)
+	&#123;
+		if(i*(i+1) &lt;a[1])  continue;
+
+		int l &#x3D; 0 ,r &#x3D; i  ;
+		int lb &#x3D; 0 ,rb &#x3D; i ; 
+		if (a[1] &gt; i * i)
+			lb &#x3D; a[1] - i * i;
+
+		for(int j &#x3D; i;  ;j++)
+		&#123;
+			
+			if(pre[r] &gt; l) rb &#x3D; min(rb ,r - pre[r]) ;
+			l +&#x3D; 2 * j + 1 ;
+			if(ne[r+1] &lt;l ) lb &#x3D; max(l - ne[r+1] ,lb ) ;
+			r+&#x3D;2*(j+1) ;
+
+		
+			if(l&gt;a[n] -a[1])break;
+		&#125;
+	
+		if(lb&lt;&#x3D;rb)
+		&#123;
+
+			std::cout&lt;&lt;(i)*(i) +lb - a[1] &lt;&lt;&quot;\n&quot; ;
+			system(&quot;pause&quot;) ; 
+			return  ; 
+		&#125;
+		if(i&#x3D;&#x3D;a[n]) system(&quot;pause&quot;) ; 
+	&#125;
+
+
+&#125;
+
+signed main()
+&#123;
+	int T;
+	&#x2F;&#x2F;cin&gt;&gt;T;
+	T &#x3D; 1; 
+	while(T--)
+	&#123;
+		solve() ; 
+	&#125;
+	return 0 ; 
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/17/CF/CF1687DCute%20number/" data-id="clahqmy8q0000o7cpcix53j2r" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/11/11/ICPC%20tourist/47-th%20shenyan%20%20tourist%20/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">My first ICPC 沈阳</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/11/17/CF/CF1687D%09Cute%20number/">CF1684H Hard Cut 题解</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/11/ICPC%20tourist/47-th%20shenyan%20%20tourist%20/">My first ICPC 沈阳</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/11/CF/CF1704H1%09Game%20of%20AI%20(easy%20version)/">CF1704H1	Game of AI (easy version)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/11/CF/CF1684H%09Hard%20Cut/">My first black</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
